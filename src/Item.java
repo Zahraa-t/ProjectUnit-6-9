@@ -1,12 +1,10 @@
-public class Monsters {
+public class Item {
     private String name;
     private String description;
-    private int dangerLevel;
 
-    public Monsters(String name, String description, int dangerLevel) {
+    public Item(String name, String description) {
         this.name = name;
         this.description = description;
-        this.dangerLevel = dangerLevel;
     }
 
     public String getName() {
@@ -17,7 +15,4 @@ public class Monsters {
         return description;
     }
 
-    public int getDangerLevel() {
-        return dangerLevel;
-    }
 }

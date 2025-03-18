@@ -1,8 +1,12 @@
-public class Hints extends Space {
+public class Hints extends Item {
+    private String name;
     private String hint;
+    private boolean itemHasHint;
+    private boolean collectedAlready;
 
-    public Hints(String name, String hint) {
-        super(name);
-        this.hint = hint;
+    public Hints(String symbol, String name, String hint, boolean itemHasHint) {
+        super(symbol, name, hint);
+        this.itemHasHint = itemHasHint;
+        collectedAlready = false;
     }
 }

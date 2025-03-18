@@ -1,10 +1,16 @@
-public class Item {
+public class Gem extends Space {
     private String name;
     private String description;
 
-    public Item(String name, String description) {
+    public Gem(String symbol, String name, String description) {
+        super(symbol);
         this.name = name;
         this.description = description;
+    }
+
+    @Override
+    public String getSymbol() {
+        return super.getSymbol();
     }
 
     public String getName() {
@@ -14,5 +20,4 @@ public class Item {
     public String getDescription() {
         return description;
     }
-
 }

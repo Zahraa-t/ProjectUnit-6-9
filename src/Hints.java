@@ -1,7 +1,8 @@
-public class Hints extends Item{
+public class Hints extends Space {
+    private String hint;
 
-
-    public Hints(String name, String description) {
-        super(name, description);
+    public Hints(String name, String hint) {
+        super(name);
+        this.hint = hint;
     }
 }

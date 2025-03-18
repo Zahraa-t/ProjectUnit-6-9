@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Game {
     Scanner scan = new Scanner(System.in);
     private String name;
+    private Gem[] gemOrder;
 
     public void Start() {
         name();
@@ -20,11 +21,9 @@ public class Game {
     }
 
     private String gemSelect() {
-        new Gems("Opal", "Shiny gem that displays a range of colors", false);
-        new Gems("Amethyst", "Mineral that shines purple", false);
-        new Gems("Sapphire", "Gem with a deep blue hue", false);
-        int num = (int) (Math.random() * 3 ) + 1;
-
+        new Gem("K", "Kashmir Sapphire", "A gem normally found in the Himalayas in North India with dark blue to lighter hues.");
+        new Gem("E","Emerald", "A gem that displays a rich green hue");
+        new Gem("Y","Yowah Nut Opal", "A gem that displays a range of colors");
     }
 
 

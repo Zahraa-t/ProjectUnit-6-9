@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Journal {
     private String journal;
-    private ArrayList<Gem> list;
+    private ArrayList<Item> list;
 
     public Journal(String name, String description) {
         journal =  "Your journal\nDiscoveries:\n";

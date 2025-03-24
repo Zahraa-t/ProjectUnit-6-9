@@ -73,7 +73,7 @@ public class Game {
     }
 
     private void setMap() {
-        map = new Space[12][12];
+        map = new Space[20][20];
         for (int a = 1; a < map.length-1; a++) {
             map[a][0] = new Space("║");
             map[a][map[0].length-1] = new Space("║");
@@ -90,6 +90,8 @@ public class Game {
         map[0][0] = new Space("╔");
         map[map.length-1][0] = new Space("╚");
         map[map.length-1][map.length-1] = new Space("╝");
+        map[14][2] = new Item("w", "Table with a book", "A frayed book rests upon a lone pine table. ");
+
 
         for (int r  = 0; r < map.length; r++) {
             for (int c  = 0; c < map[0].length; c++){

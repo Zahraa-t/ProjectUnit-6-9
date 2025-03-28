@@ -1,11 +1,9 @@
-public class Gem extends Space {
-    private String name;
-    private String description;
+public class Gem extends Item {
+    private boolean collected;
 
-    public Gem(String symbol, String name, String description) {
-        super(symbol);
-        this.name = name;
-        this.description = description;
+    public Gem(String name, String description, boolean collected) {
+        super("\uD83D\uDC8E", name, description);
+        this.collected = collected;
     }
 
     @Override
@@ -13,11 +11,7 @@ public class Gem extends Space {
         return super.getSymbol();
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
+    public void setCollected(boolean collected) {
+        this.collected = collected;
     }
 }

@@ -2,20 +2,22 @@ import java.util.Scanner;
 
 public class Game {
     Scanner scan;
-    private String name;
-    private Gem[] gemOrder;
     private Space[][] map;
-    private boolean done;
     private Player p;
+    private Journal jou;
 
     public Game() {
         scan = new Scanner(System.in);
-        gemOrder = new Gem[3];
-        done = false;
-        p = new Player("\uD800\uDC2A");
-        setUp();
+        jou = new Journal();
+        name();
         setMap();
+        System.out.println(Player.class.getName());
         menu();
+    }
+
+    public void name() {
+        String n = scan.nextLine();
+        p = new Player(n);
     }
 
     public void menu() {
@@ -109,16 +111,6 @@ public class Game {
             }
             System.out.println();
         }
-    }
-
-
-    private void setUp() {
-        Gem one = new Gem("K", "Kashmir Sapphire", "A gem normally found in the Himalayas in North India with dark blue to lighter hues.");
-        Gem two = new Gem("E","Emerald", "A gem that displays a rich green hue");
-        Gem three = new Gem("Y","Yowah Nut Opal", "A gem that displays a variety of colors");
-        gemOrder[0] = one;
-        gemOrder[1] = two;
-        gemOrder[2] = three;
     }
 
 

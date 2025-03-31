@@ -5,10 +5,12 @@ public class Game {
     private Space[][] map;
     private Player p;
     private Journal jou;
+    private boolean done;
 
     public Game() {
         scan = new Scanner(System.in);
         jou = new Journal();
+        done = false;
         name();
         setMap();
         System.out.println(Player.class.getName());
@@ -35,7 +37,7 @@ public class Game {
 
             String ans = scan.nextLine();
             if (ans.equals("W")) {
-                if ((r - 1) >= 1) {
+                if ((r - 1) >= 1 && !(map[r-1][c] instanceof Item)) {
                     map[r][c] = new Space(" ");
                     r--;
                 } else {
@@ -43,7 +45,7 @@ public class Game {
                 }
             }
             if (ans.equals("A")) {
-                if (c - 1 >= 1) {
+                if (c - 1 >= 1 && !(map[r][c-1] instanceof Item)) {
                     map[r][c] = new Space(" ");
                     c--;
                 } else {
@@ -51,7 +53,7 @@ public class Game {
                 }
             }
             if (ans.equals("S")) {
-                if (r + 1 < map.length-1) {
+                if (r + 1 < map.length-1 && !(map[r+1][c] instanceof Item)) {
                     map[r][c] = new Space(" ");
                     r++;
                 } else {
@@ -59,7 +61,7 @@ public class Game {
                 }
             }
             if (ans.equals("D")) {
-                if ((c + 1) < map[0].length-1) {
+                if ((c + 1) < map[0].length-1 && !(map[r][c+1] instanceof Item)) {
                     map[r][c] = new Space(" ");
                     c++;
                 } else {

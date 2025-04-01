@@ -5,8 +5,8 @@ public class Journal {
     private ArrayList<Tool> list;
     private ArrayList<Gem> gems;
 
-    public Journal() {
-        journal =  "Your journal\nDiscoveries:\n";
+    public Journal(String name) {
+        journal =  Colors.BLUE + "[" + name + "'s journal]\nDiscoveries:\n" + Colors.RESET;
         list = new ArrayList<>();
         gems = new ArrayList<>();
     }
@@ -29,17 +29,4 @@ public class Journal {
     public void addCollected(Gem element) {
         gems.add(element);
     }
-
-    public void gemsCollectd() {
-        Gem one = new Gem( "Kashmir Sapphire", "A gem found with dark blue to lighter hues.", false);
-        Gem two = new Gem("Emerald", "A gem that displays a rich green hue", false);
-        Gem three = new Gem("Yowah Nut Opal", "A gem that displays a variety of colors", false);
-        gems.add(one);
-        gems.add(two);
-        gems.add(three);
-    }
-
-
-
-
 }

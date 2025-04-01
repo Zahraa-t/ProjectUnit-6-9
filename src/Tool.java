@@ -6,12 +6,12 @@ public class Tool extends Item {
         this.collectedAlready = collectedAlready;
     }
 
-    public String adding() {
-        if (!collectedAlready) {
-            collectedAlready = true;
-            return Journal.;
-        } else {
-            return "This spot is empty. Nothing to collect here. ";
-        }
-    }
+//    public String adding() {
+//        if (!collectedAlready) {
+//            collectedAlready = true;
+//
+//        } else {
+//            return "This spot is empty. Nothing to collect here. ";
+//        }
+//    }
 }

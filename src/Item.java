@@ -12,4 +12,12 @@ public class Item extends Space{
     public String getSymbol() {
         return super.getSymbol();
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getText() {
+        return text;
+    }
 }

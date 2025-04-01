@@ -9,15 +9,16 @@ public class Game {
 
     public Game() {
         scan = new Scanner(System.in);
-        jou = new Journal();
         done = false;
         name();
+        jou = new Journal(p.getName());
+        jou.getJournal();
         setMap();
-        System.out.println(Player.class.getName());
         menu();
     }
 
     public void name() {
+        System.out.print("Enter you name: ");
         String n = scan.nextLine();
         p = new Player(n);
     }
@@ -31,7 +32,9 @@ public class Game {
         }
 
         while (!done) {
-            start++;
+            if (start == 0) {
+                start++;
+            }
             printMap();
             System.out.println("Enter a direction: W, A, S, D (up, left, down, right)");
 
@@ -65,13 +68,19 @@ public class Game {
                     map[r][c] = new Space(" ");
                     c++;
                 } else {
-                    System.out.println("You are moving out of bounds!");
+                    if (map[r][c+1] instanceof Item) {
+                        System.out.println("Found: " + ((Item) map[r][c+1]).getName());
+                        System.out.println(((Item) map[r][c+1]).getText());
+                    } else {
+                        System.out.println("You are moving out of bounds!");
+                    }
                 }
             }
             if (!ans.equals("W") && !ans.equals("A") && !ans.equals("S") && !ans.equals("D")) {
                 System.out.println("Invalid direction. ");
             }
             map[r][c] = p;
+
         }
 
     }
@@ -86,15 +95,16 @@ public class Game {
             map[0][b] = new Space("═");
             map[map[0].length-1][b] = new Space("═");
         }
-        for (int b = 1; b < map.length-1; b++) {
-
-        }
 
         map[0][map.length-1] = new Space("╗");
         map[0][0] = new Space("╔");
         map[map.length-1][0] = new Space("╚");
         map[map.length-1][map.length-1] = new Space("╝");
         map[14][2] = new Item("w", "Table with a book", "A frayed book rests upon a lone pine table. ");
+
+        map[3][3] = new Gem( "Kashmir Sapphire", "A gem found with dark blue to lighter hues.", false);
+        map[5][8] = new Gem("Emerald", "A gem that displays a rich green hue", false);
+        map[2][9] = new Gem("Yowah Nut Opal", "A gem that displays a variety of colors", false);
 
 
         for (int r  = 0; r < map.length; r++) {
@@ -114,6 +124,4 @@ public class Game {
             System.out.println();
         }
     }
-
-
 }

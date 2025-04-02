@@ -14,4 +14,9 @@ public class Gem extends Item {
     public void setCollected(boolean collected) {
         this.collected = collected;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + ", Gem Collected? " + collected;
+    }
 }

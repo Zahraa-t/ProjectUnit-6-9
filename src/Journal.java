@@ -6,7 +6,7 @@ public class Journal {
     private ArrayList<Gem> gems;
 
     public Journal(String name) {
-        journal =  Colors.BLUE + "[" + name + "'s journal]\nDiscoveries:\n" + Colors.RESET;
+        journal =  Colors.PURPLE + "[" + name + "'s journal]" + Colors.RESET + Colors.YELLOW + "\nDiscoveries:" + Colors.RESET;
         list = new ArrayList<>();
         gems = new ArrayList<>();
     }
@@ -16,14 +16,22 @@ public class Journal {
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i));
         }
-        System.out.println("\nGems collected: ");
+        System.out.println(Colors.CYAN + "Gems collected: " + Colors.RESET);
         for (int i = 0; i < gems.size(); i++) {
             System.out.println(gems.get(i));
         }
     }
 
     public void addToJournal(Tool add1) {
-        list.add(add1);
+        if (add1.isCollectedAlready()) {
+            list.add(add1);
+        } else {
+            System.out.println("You already have this. ");
+        }
+    }
+
+    public void remove (Tool sub) {
+        list.remove(sub);
     }
 
     public void addCollected(Gem element) {

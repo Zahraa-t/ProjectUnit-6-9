@@ -20,4 +20,9 @@ public class Item extends Space{
     public String getText() {
         return text;
     }
+
+    @Override
+    public String toString() {
+        return getName() + ", " + getText();
+    }
 }

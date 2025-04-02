@@ -12,7 +12,6 @@ public class Game {
         done = false;
         name();
         jou = new Journal(p.getName());
-        jou.getJournal();
         setMap();
         menu();
     }
@@ -36,7 +35,7 @@ public class Game {
                 start++;
             }
             printMap();
-            System.out.println("Enter a direction: W, A, S, D (up, left, down, right)");
+            System.out.println("Enter a direction: W, A, S, D (up, left, down, right) / View journal: J");
 
             String ans = scan.nextLine();
             if (ans.equals("W")) {
@@ -44,7 +43,20 @@ public class Game {
                     map[r][c] = new Space(" ");
                     r--;
                 } else {
-                    System.out.println("You are moving out of bounds!");
+                    if (map[r-1][c] instanceof Item) {
+                        System.out.println("Found: " + ((Item) map[r-1][c]).getName());
+                        System.out.println(((Item) map[r-1][c]).getText());
+                        if (map[r-1][c] instanceof Gem) {
+                            jou.addCollected((Gem) map[r-1][c]);
+                            map[r-1][c] = new Space(" ");
+                        }
+                        if (map[r-1][c] instanceof Tool) {
+                            jou.addToJournal((Tool) map[r-1][c]);
+                            ((Tool) map[r-1][c]).setCollectedAlready(true);
+                        }
+                    } else {
+                        System.out.println("You are moving out of bounds!");
+                    }
                 }
             }
             if (ans.equals("A")) {
@@ -52,7 +64,20 @@ public class Game {
                     map[r][c] = new Space(" ");
                     c--;
                 } else {
-                    System.out.println("You are moving out of bounds!");
+                    if (map[r][c-1] instanceof Item) {
+                        System.out.println("Found: " + ((Item) map[r][c-1]).getName());
+                        System.out.println(((Item) map[r][c-1]).getText());
+                        if (map[r][c-1] instanceof Gem) {
+                            jou.addCollected((Gem) map[r][c-1]);
+                            map[r][c-1] = new Space(" ");
+                        }
+                        if (map[r][c-1] instanceof Tool) {
+                            jou.addToJournal((Tool) map[r][c-1]);
+                            ((Tool) map[r][c-1]).setCollectedAlready(true);
+                        }
+                    } else {
+                        System.out.println("You are moving out of bounds!");
+                    }
                 }
             }
             if (ans.equals("S")) {
@@ -60,7 +85,20 @@ public class Game {
                     map[r][c] = new Space(" ");
                     r++;
                 } else {
-                    System.out.println("You are moving out of bounds!");
+                    if (map[r+1][c] instanceof Item) {
+                        System.out.println("Found: " + ((Item) map[r+1][c]).getName());
+                        System.out.println(((Item) map[r+1][c]).getText());
+                        if (map[r+1][c] instanceof Gem) {
+                            jou.addCollected((Gem) map[r+1][c]);
+                            map[r+1][c] = new Space(" ");
+                        }
+                        if (map[r+1][c] instanceof Tool) {
+                            jou.addToJournal((Tool) map[r+1][c]);
+                            ((Tool) map[r+1][c]).setCollectedAlready(true);
+                        }
+                    } else {
+                        System.out.println("You are moving out of bounds!");
+                    }
                 }
             }
             if (ans.equals("D")) {
@@ -71,16 +109,26 @@ public class Game {
                     if (map[r][c+1] instanceof Item) {
                         System.out.println("Found: " + ((Item) map[r][c+1]).getName());
                         System.out.println(((Item) map[r][c+1]).getText());
+                        if (map[r][c+1] instanceof Gem) {
+                            jou.addCollected((Gem) map[r][c+1]);
+                            map[r][c+1] = new Space(" ");
+                        }
+                        if (map[r][c+1] instanceof Tool) {
+                            jou.addToJournal((Tool) map[r][c+1]);
+                            ((Tool) map[r][c+1]).setCollectedAlready(true);
+                        }
                     } else {
                         System.out.println("You are moving out of bounds!");
                     }
                 }
             }
-            if (!ans.equals("W") && !ans.equals("A") && !ans.equals("S") && !ans.equals("D")) {
-                System.out.println("Invalid direction. ");
+            if (ans.equals("J")) {
+                jou.getJournal();
+            }
+            if (!ans.equals("W") && !ans.equals("A") && !ans.equals("S") && !ans.equals("D") && !ans.equals("J")) {
+                System.out.println("Invalid option. ");
             }
             map[r][c] = p;
-
         }
 
     }
@@ -100,11 +148,12 @@ public class Game {
         map[0][0] = new Space("╔");
         map[map.length-1][0] = new Space("╚");
         map[map.length-1][map.length-1] = new Space("╝");
-        map[14][2] = new Item("w", "Table with a book", "A frayed book rests upon a lone pine table. ");
+        map[16][1] = new Item("X", "The Exit", "It is sealed shut by some magic");
+        map[11][1] = new Tool("w", "Table with a book", "A frayed book rests upon a lone pine table", false);
 
-        map[3][3] = new Gem( "Kashmir Sapphire", "A gem found with dark blue to lighter hues.", false);
-        map[5][8] = new Gem("Emerald", "A gem that displays a rich green hue", false);
-        map[2][9] = new Gem("Yowah Nut Opal", "A gem that displays a variety of colors", false);
+        map[9][8] = new Gem( Colors.BLUE + "\uD83D\uDC8EKashmir Sapphire\uD83D\uDC8E" + Colors.RESET, "A gem found with dark blue to lighter hues", false);
+        map[8][8] = new Gem( Colors.GREEN + "\uD83D\uDC8EEmerald\uD83D\uDC8E" + Colors.RESET, "A gem that displays a rich green hue", false);
+        map[10][8] = new Gem("\uD83D\uDC8EOpal\uD83D\uDC8E", "A gem that displays a variety of colors", false);
 
 
         for (int r  = 0; r < map.length; r++) {

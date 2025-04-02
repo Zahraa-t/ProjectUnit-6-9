@@ -6,12 +6,20 @@ public class Tool extends Item {
         this.collectedAlready = collectedAlready;
     }
 
-//    public String adding() {
-//        if (!collectedAlready) {
-//            collectedAlready = true;
-//
-//        } else {
-//            return "This spot is empty. Nothing to collect here. ";
-//        }
-//    }
+    public boolean isCollectedAlready() {
+        return collectedAlready;
+    }
+
+    public void setCollectedAlready(boolean collectedAlready) {
+        this.collectedAlready = collectedAlready;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + ", is collected: ";
+    }
+
+    public void use() {
+        System.out.println("You used this item. You can't use it anymore. It's gone forever. ");
+    }
 }

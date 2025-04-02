@@ -51,8 +51,12 @@ public class Game {
                             map[r-1][c] = new Space(" ");
                         }
                         if (map[r-1][c] instanceof Tool) {
-                            jou.addToJournal((Tool) map[r-1][c]);
-                            ((Tool) map[r-1][c]).setCollectedAlready(true);
+                            System.out.println("Collect? (C)");
+                            String an = scan.nextLine();
+                            if (an.equals("C")) {
+                                jou.addToJournal((Tool) map[r - 1][c]);
+                                ((Tool) map[r - 1][c]).setCollectedAlready(true);
+                            }
                         }
                     } else {
                         System.out.println("You are moving out of bounds!");

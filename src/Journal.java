@@ -22,11 +22,12 @@ public class Journal {
         }
     }
 
-    public void addToJournal(Tool add1) {
-        if (add1.isCollectedAlready()) {
-            list.add(add1);
-        } else {
-            System.out.println("You already have this. ");
+    public void addToJournal(Item add1) {
+        if (add1 instanceof Tool) {
+            if (((Tool)add1).isCollectedAlready()) {
+                list.add((Tool) add1);
+                ((Tool)add1).setCollectedAlready(true);
+            }
         }
     }
 
@@ -37,4 +38,5 @@ public class Journal {
     public void addCollected(Gem element) {
         gems.add(element);
     }
+
 }

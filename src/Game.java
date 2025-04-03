@@ -74,7 +74,13 @@ public class Game {
                             jou.addCollected((Gem) map[r][c-1]);
                             map[r][c-1] = new Space(" ");
                         }
-                        jou.addToJournal((Item) map[r][c-1]);
+//                        if (map[r-1][c] instanceof Tool && !((Tool) map[r-1][c]).isCollectedAlready()) {
+//                            System.out.println("Collect? (C)");
+//                            String an = scan.nextLine();
+//                            if (an.equals("C")) {
+//                                jou.addToJournal((Tool) map[r - 1][c]);
+//                            }
+//                        }
                     } else {
                         System.out.println("You are moving out of bounds!");
                     }
@@ -92,7 +98,13 @@ public class Game {
                             jou.addCollected((Gem) map[r+1][c]);
                             map[r+1][c] = new Space(" ");
                         }
-                        jou.addToJournal((Item) map[r+1][c]);
+//                        if (map[r-1][c] instanceof Tool && !((Tool) map[r-1][c]).isCollectedAlready()) {
+//                            System.out.println("Collect? (C)");
+//                            String an = scan.nextLine();
+//                            if (an.equals("C")) {
+//                                jou.addToJournal((Tool) map[r - 1][c]);
+//                            }
+//                        }
                     } else {
                         System.out.println("You are moving out of bounds!");
                     }
@@ -110,7 +122,13 @@ public class Game {
                             jou.addCollected((Gem) map[r][c+1]);
                             map[r][c+1] = new Space(" ");
                         }
-                        jou.addToJournal((Item) map[r][c+1]);
+//                        if (map[r-1][c] instanceof Tool && !((Tool) map[r-1][c]).isCollectedAlready()) {
+//                            System.out.println("Collect? (C)");
+//                            String an = scan.nextLine();
+//                            if (an.equals("C")) {
+//                                jou.addToJournal((Tool) map[r - 1][c]);
+//                            }
+//                        }
                     } else {
                         System.out.println("You are moving out of bounds!");
                     }

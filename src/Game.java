@@ -50,13 +50,11 @@ public class Game {
                             jou.addCollected((Gem) map[r-1][c]);
                             map[r-1][c] = new Space(" ");
                         }
-                        jou.addToJournal((Item) map[r-1][c]);
-                        if (map[r-1][c] instanceof Tool) {
+                        if (map[r-1][c] instanceof Tool && !((Tool) map[r-1][c]).isCollectedAlready()) {
                             System.out.println("Collect? (C)");
                             String an = scan.nextLine();
                             if (an.equals("C")) {
                                 jou.addToJournal((Tool) map[r - 1][c]);
-                                ((Tool) map[r - 1][c]).setCollectedAlready(true);
                             }
                         }
                     } else {

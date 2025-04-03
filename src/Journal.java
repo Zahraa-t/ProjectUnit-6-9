@@ -23,16 +23,14 @@ public class Journal {
     }
 
     public void addToJournal(Item add1) {
-        if (add1 instanceof Tool) {
-            if (((Tool)add1).isCollectedAlready()) {
-                list.add((Tool) add1);
-                ((Tool)add1).setCollectedAlready(true);
-            }
+        if (((Tool)add1).isCollectedAlready()) {
+            list.add((Tool) add1);
+            ((Tool)add1).setCollectedAlready(true);
         }
     }
 
-    public void remove (Tool sub) {
-        list.remove(sub);
+    public void use (Tool thing) {
+        list.remove(thing);
     }
 
     public void addCollected(Gem element) {

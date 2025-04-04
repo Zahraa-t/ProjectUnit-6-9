@@ -165,11 +165,12 @@ public class Game {
         map[4][23] = new Tool("#", "Crack in the floor ", "Maybe it can be broken open");
         map[8][1] = new Tool("\uD80C\uDEAF", "Table with holding items", "Vases and cups stand on a table");
         map[8][4] = new Tool("\uD80C\uDEB3", "Table", "A frayed book rests upon a lone pine table");
+        map[5][23] = new Tool("⬓", "Treasure Chest", "Maybe it can be broken open");
 
-
+        //🗝 🛡 🧺 🫖
 
         map[2][2] = new Gem( Colors.BLUE + "\uD83D\uDC8EKashmir Sapphire\uD83D\uDC8E" + Colors.RESET, "A gem found with dark blue to lighter hues",false);
-        map[7][16] = new Gem( Colors.GREEN + "\uD83D\uDC8EEmerald\uD83D\uDC8E" + Colors.RESET, "A gem that displays a rich green shine", false);
+        map[4][14] = new Gem( Colors.GREEN + "\uD83D\uDC8EEmerald\uD83D\uDC8E" + Colors.RESET, "A gem that displays a rich green shine", false);
         map[8][6] = new Gem("\uD83D\uDC8EOpal\uD83D\uDC8E", "A gem that displays a variety of colors", false);
         map[4][9] = new Gem(Colors.RED + "\uD83D\uDC8ERuby\uD83D\uDC8E" + Colors.RESET, "A gem sporting a vivid red color", true);
 

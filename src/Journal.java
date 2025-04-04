@@ -43,10 +43,12 @@ public class Journal {
         int result = 0;
         for (int g = 0; g < gems.size(); g++) {
             if (!gems.get(g).isTrick()) {
-
+                result++;
             }
         }
-
+        if (result == 3 ) {
+            return true;
+        }
         return false;
     }
 

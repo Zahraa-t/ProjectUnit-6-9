@@ -56,14 +56,12 @@ public class Journal {
         return false;
     }
 
-    public boolean chest(Space move) {
+    public void chest(Space move) {
         if (progressing("Key") && move.getSymbol().equals("⬓")) {
             Tool t = new Tool("˥","Crowbar", "You can pry things open now");
             list.add(t);
             System.out.println("You've obtained: " + t);
-            return true;
         }
-        return false;
     }
 
     public boolean floor(Space move) {

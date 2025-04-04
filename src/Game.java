@@ -173,11 +173,10 @@ public class Game {
         map[map.length-1][0] = new Space("╚");
         map[map.length-1][map[0].length-1] = new Space("╝");
         map[6][17] = new Item("X", "The Exit", "It is sealed shut by some magic");
-        map[3][7] = new Tool("#", "Crack in the floor ", "Maybe it can be broken open");
+        map[1][7] = new Tool("#", "Crack in the floor ", "Maybe it can be broken open");
         map[6][1] = new Tool("\uD80C\uDEAF", "Table with holding items", "Vases and cups stand on a table");
         map[6][4] = new Tool("\uD80C\uDEB3", "Table", "A frayed book rests upon a lone pine table");
-        map[4][18] = new Tool("⮹", "Treasure Chest", "Maybe it can be broken open");
-
+        map[1][18] = new Tool("⮹", "Treasure Chest", "Can unlock with a key");
         // 🛡 🧺 🫖
 
         map[2][2] = new Gem( Colors.BLUE + "\uD83D\uDC8EKashmir Sapphire\uD83D\uDC8E" + Colors.RESET, "A gem found with dark blue to lighter hues",false);

@@ -162,7 +162,7 @@ public class Game {
         map[map.length-1][0] = new Space("╚");
         map[map.length-1][map[0].length-1] = new Space("╝");
         map[9][20] = new Item("X", "The Exit", "It is sealed shut by some magic");
-        map[4][23] = new Tool("⍼", "Crack in the floor ", "A frayed book rests upon a lone pine table");
+        map[4][23] = new Tool("#", "Crack in the floor ", "Maybe it can be broken open");
         map[8][1] = new Tool("\uD80C\uDEAF", "Table with holding items", "Vases and cups stand on a table");
         map[8][4] = new Tool("\uD80C\uDEB3", "Table", "A frayed book rests upon a lone pine table");
 

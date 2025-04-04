@@ -14,14 +14,14 @@ public class Tool extends Item {
         this.collectedAlready = collectedAlready;
     }
 
-    @Override
-    public String toString() {
-        if (isCollectedAlready()) {
-            return "Already discovered." + super.toString();
-        } else {
-            return "New discovery! " + super.toString();
-        }
-    }
+//    @Override
+//    public String toString() {
+//        if (isCollectedAlready()) {
+//            return "Already discovered." + super.toString();
+//        } else {
+//            return "New discovery! " + super.toString();
+//        }
+//    }
 
     public String chest() {
          return "⠀⠀⠀⢠⡄⢠⣤⣤⠀⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⠀⣤⣤⡄⢠⡄⠀⠀⠀\n" +

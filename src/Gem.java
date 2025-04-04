@@ -1,9 +1,9 @@
-public class Gem extends Item {
-    private boolean collected;
+public class Gem extends Tool {
+    private boolean trick;
 
-    public Gem(String name, String description, boolean collected) {
-        super("\uD83D\uDC8E", name, description);
-        this.collected = collected;
+    public Gem(String name, String description , boolean trick) {
+        super("⟠", name, description);
+        this.trick = trick;
     }
 
     @Override
@@ -11,12 +11,12 @@ public class Gem extends Item {
         return super.getSymbol();
     }
 
-    public void setCollected(boolean collected) {
-        this.collected = collected;
+    public boolean isTrick() {
+        return trick;
     }
 
     @Override
     public String toString() {
-        return super.toString() + ", Gem Collected? " + collected;
+        return super.toString();
     }
 }

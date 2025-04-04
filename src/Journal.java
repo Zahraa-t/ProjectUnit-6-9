@@ -26,6 +26,8 @@ public class Journal {
         if (((Tool)add1).isCollectedAlready()) {
             list.add((Tool) add1);
             ((Tool)add1).setCollectedAlready(true);
+        } else {
+            System.out.println("You've already collected this. ");
         }
     }
 
@@ -35,6 +37,26 @@ public class Journal {
 
     public void addCollected(Gem element) {
         gems.add(element);
+    }
+
+    public boolean exitCheck() {
+        int result = 0;
+        for (int g = 0; g < gems.size(); g++) {
+            if (!gems.get(g).isTrick()) {
+
+            }
+        }
+
+        return false;
+    }
+
+    public boolean progressing(String checkForThis) {
+        for (int l = 0; l < list.size(); l++) {
+            if (list.get(l).getName().equals(checkForThis)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

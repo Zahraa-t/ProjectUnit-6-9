@@ -14,9 +14,4 @@ public class Gem extends Tool {
     public boolean isTrick() {
         return trick;
     }
-
-    @Override
-    public String toString() {
-        return super.toString();
-    }
 }

@@ -14,16 +14,7 @@ public class Tool extends Item {
         this.collectedAlready = collectedAlready;
     }
 
-//    @Override
-//    public String toString() {
-//        if (isCollectedAlready()) {
-//            return "Already discovered." + super.toString();
-//        } else {
-//            return "New discovery! " + super.toString();
-//        }
-//    }
-
-    public String chest() {
+    public String treasureChest() {
          return "⠀⠀⠀⢠⡄⢠⣤⣤⠀⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⠀⣤⣤⡄⢠⡄⠀⠀⠀\n" +
                 "⠀⠀⠀⢸⡇⢸⣿⣿⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⣿⣿⡇⢸⡇⠀⠀⠀\n" +
                 "⠀⠀⠀⣿⡇⢸⣿⣿⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⣿⣿⡇⢸⣿⠀⠀⠀\n" +
@@ -37,5 +28,10 @@ public class Tool extends Item {
                 "⠀⠀⠘⠛⠃⠈⠙⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠋⠁⠘⠛⠃⠀⠀\n" +
                 "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
                 "The treasure chest clicks. Turns out there is a secret compartment. ";
+    }
+
+    @Override
+    public String toString() {
+        return getSymbol() + "\n" + super.toString();
     }
 }

@@ -14,7 +14,7 @@ public class Journal {
     public void getJournal() {
         System.out.println(journal);
         for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i));
+            System.out.println(list.get(i).getText());
         }
         System.out.println(Colors.CYAN + "Gems collected: " + Colors.RESET);
         for (int i = 0; i < gems.size(); i++) {
@@ -22,20 +22,15 @@ public class Journal {
         }
     }
 
-    public void addToJournal(Item add1) {
-        if (((Tool)add1).isCollectedAlready()) {
+    public void addToTools(Item add1) {
+        if (!((Tool) add1).isCollectedAlready()) {
+            System.out.println("hi");
             list.add((Tool) add1);
             ((Tool)add1).setCollectedAlready(true);
-        } else {
-            System.out.println("You've already collected this. ");
         }
     }
 
-    public void use (Tool thing) {
-        list.remove(thing);
-    }
-
-    public void addCollected(Gem element) {
+    public void addGems(Gem element) {
         gems.add(element);
     }
 
@@ -52,7 +47,7 @@ public class Journal {
         return false;
     }
 
-    public boolean progressing(String checkForThis) {
+    private boolean progressing(String checkForThis) {
         for (int l = 0; l < list.size(); l++) {
             if (list.get(l).getName().equals(checkForThis)) {
                 return true;
@@ -61,4 +56,24 @@ public class Journal {
         return false;
     }
 
+    public boolean chest(Space move) {
+        if (progressing("Key") && move.getSymbol().equals("⬓")) {
+            Tool t = new Tool("˥","Crowbar", "You can pry things open now");
+            list.add(t);
+            System.out.println("You've obtained: " + t);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean floor(Space move) {
+        if (progressing("Crowbar") && move.getSymbol().equals("#")) {
+            Gem h = new Gem(Colors.RED + "\uD83D\uDC8ERuby\uD83D\uDC8E" + Colors.RESET, "A gem sporting a vivid red color", true);;
+            gems.add(h);
+            Tool t = new Tool("˥","Crowbar", "You can pry things open now");
+            t.treasureChest();
+            return true;
+        }
+        return false;
+    }
 }

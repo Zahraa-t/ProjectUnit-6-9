@@ -14,9 +14,9 @@ public class Journal {
     public void getJournal() {
         System.out.println(journal);
         for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i).getText());
+            System.out.println(list.get(i).getName() + ": "  + list.get(i).getText());
         }
-        System.out.println(Colors.CYAN + "Gems collected: " + Colors.RESET);
+        System.out.println("\n" + Colors.CYAN + "Gems collected: " + Colors.RESET);
         for (int i = 0; i < gems.size(); i++) {
             System.out.println(gems.get(i));
         }
@@ -24,17 +24,29 @@ public class Journal {
 
     public void addToTools(Item add1) {
         if (!((Tool) add1).isCollectedAlready()) {
-            System.out.println("hi");
             list.add((Tool) add1);
             ((Tool)add1).setCollectedAlready(true);
         }
+    }
+
+    public void removeTool(int add1) {
+        list.remove(add1);
     }
 
     public void addGems(Gem element) {
         gems.add(element);
     }
 
-    public boolean exitCheck() {
+    public int progressing(String checkForThis) {
+        for (int l = 0; l < list.size(); l++) {
+            if (list.get(l).getName().equals(checkForThis)) {
+                return l;
+            }
+        }
+        return 0;
+    }
+
+    public boolean exitCheck(Space move) {
         int result = 0;
         for (int g = 0; g < gems.size(); g++) {
             if (!gems.get(g).isTrick()) {
@@ -42,35 +54,11 @@ public class Journal {
             }
         }
         if (result == 3 ) {
+            System.out.println("You opened the door ");
             return true;
         }
-        return false;
-    }
-
-    private boolean progressing(String checkForThis) {
-        for (int l = 0; l < list.size(); l++) {
-            if (list.get(l).getName().equals(checkForThis)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public void chest(Space move) {
-        if (progressing("Key") && move.getSymbol().equals("⬓")) {
-            Tool t = new Tool("˥","Crowbar", "You can pry things open now");
-            list.add(t);
-            System.out.println("You've obtained: " + t);
-        }
-    }
-
-    public boolean floor(Space move) {
-        if (progressing("Crowbar") && move.getSymbol().equals("#")) {
-            Gem h = new Gem(Colors.RED + "\uD83D\uDC8ERuby\uD83D\uDC8E" + Colors.RESET, "A gem sporting a vivid red color", true);;
-            gems.add(h);
-            Tool t = new Tool("˥","Crowbar", "You can pry things open now");
-            t.treasureChest();
-            return true;
+        if (result < gems.size()) {
+            System.out.println("Some of the gems you're holding are not true");
         }
         return false;
     }

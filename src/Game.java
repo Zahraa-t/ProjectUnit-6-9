@@ -49,7 +49,7 @@ public class Game {
                         System.out.println(((Item) w).getText());
                         if (w instanceof Gem) {
                             journal.addGems((Gem) w);
-                            w = new Space(" ");
+                            map[r-1][c] = new Space(" ");
                         }
                         if (w instanceof Tool && !((Tool) w).isCollectedAlready()) {
                             shortcut(w);
@@ -70,7 +70,7 @@ public class Game {
                         System.out.println(((Item) a).getText());
                         if (a instanceof Gem) {
                             journal.addGems((Gem) a);
-                            a = new Space(" ");
+                            map[r][c-1] = new Space(" ");
                         }
                         if (a instanceof Tool) {
                             shortcut(a);
@@ -91,7 +91,7 @@ public class Game {
                         System.out.println(((Item) s).getText());
                         if (s instanceof Gem) {
                             journal.addGems((Gem) s);
-                            s = new Space(" ");
+                            map[r+1][c] = new Space(" ");
                         }
                         if (s instanceof Tool && !((Tool) s).isCollectedAlready()) {
                             shortcut(s);
@@ -102,20 +102,20 @@ public class Game {
                 }
             }
             if (ans.equals("D")) {
-                Space s = map[r][c+1];
-                if ((c + 1) < map[0].length-1 && !(s instanceof Item)) {
+                Space d = map[r][c+1];
+                if ((c + 1) < map[0].length-1 && !(d instanceof Item)) {
                     map[r][c] = new Space(" ");
                     c++;
                 } else {
-                    if (s instanceof Item) {
-                        System.out.println("Found: " + ((Item) s).getName());
-                        System.out.println(((Item) s).getText());
-                        if (s instanceof Gem) {
-                            journal.addGems((Gem) s);
-                            s = new Space(" ");
+                    if (d instanceof Item) {
+                        System.out.println("Found: " + ((Item) d).getName());
+                        System.out.println(((Item) d).getText());
+                        if (d instanceof Gem) {
+                            journal.addGems((Gem) d);
+                            map[r][c+1] = new Space(" ");
                         }
-                        if (s instanceof Tool) {
-                            shortcut(s);
+                        if (d instanceof Tool) {
+                            shortcut(d);
                         }
                     } else {
                         System.out.println("You are moving out of bounds!");
@@ -130,30 +130,85 @@ public class Game {
             }
             map[r][c] = p;
         }
-
+        win();
     }
 
     private void shortcut(Space e) {
-        journal.chest(e);
-        journal.floor(e);
         bookRiddle(e);
+        chest(e);
+        if (floor(e)) {
+            chest2(e);
+        }
+        if (((Item) e).getName().equals("Exit") && journal.exitCheck(e)) {
+            done = true;
+        }
     }
 
-    private void bookRiddle(Space move) {
-        if (move.getSymbol().equals("\uD83D\uDCD6")) {
+    private int bookRiddle(Space move) {
+        int i = 0;
+        if (((Item)move).getName().equals("Table")) {
             int you = 0;
-            System.out.println("What has keys but can’t open locks?");
-            String a = scan.nextLine();
             while (you == 0) {
+                System.out.println("\nWhat has keys but can’t open locks?");
+                String a = scan.nextLine();
                 if (a.toLowerCase().equals("keyboard")) {
                     System.out.println("You got it right!");
                     you++;
                 } else {
-                    System.out.println("That's so wrong...");
+                    System.out.println("That's wrong...\n");
                 }
             }
+            System.out.println("You gained a key. \uD83D\uDDDD\n");
             journal.addToTools(new Tool("\uD83D\uDDDD", "Key", "Can unlock a treasure chest"));
+            i++;
         }
+        return i;
+    }
+
+    public void chest(Space move) {
+        if (journal.progressing("Key") != 0 && move.getSymbol().equals("⮹")) {
+            Tool t = new Tool("˥","Crowbar", "You can pry things open now");
+            journal.addToTools(t);
+            journal.removeTool(journal.progressing("Key"));
+            System.out.println("You used your key");
+            System.out.println("\nYou've obtained: " + t.getName());
+        }
+    }
+
+    public boolean floor(Space move) {
+        if (journal.progressing("Crowbar") != 0 && move.getSymbol().equals("#")) {
+            Gem h = new Gem(Colors.RED + "\uD83D\uDC8ERuby\uD83D\uDC8E" + Colors.RESET, "A gem sporting a vivid red color", true);
+            System.out.println("You used your crowbar.\nYou found a round red gem!");
+            journal.removeTool(journal.progressing("Crowbar"));
+            journal.addGems(h);
+            h.treasureChest();
+            map[1][18] = new Tool("⮹", "Treasure Chest 2nd Level", "Secret compartment can be opened with a circular object");
+            return true;
+        }
+        return false;
+    }
+
+    public boolean chest2(Space move) {
+        if (journal.progressing("Ruby") != 0 && move.getSymbol().equals("⮹")) {
+            Gem h = new Gem(Colors.RED + "\uD83D\uDC8ERuby\uD83D\uDC8E" + Colors.RESET, "A gem sporting a vivid red color", true);
+            journal.removeTool(journal.progressing("Ruby"));
+            journal.addGems(h);
+            h.treasureChest();
+            map[1][18] = new Tool("⮹", "Treasure Chest 2nd Level", "Secret compartment can be opened with a circular object");
+            return true;
+        }
+        return false;
+    }
+
+
+
+    private void win() {
+
+        System.out.println(
+                "-------------------------\n" +
+                        "---\\    /---|---|\\ |-----\n" +
+                        "----\\/\\/----|---| \\|-----\n"
+        );
     }
 
 
@@ -174,10 +229,10 @@ public class Game {
         map[map.length-1][map[0].length-1] = new Space("╝");
         map[6][17] = new Item("X", "The Exit", "It is sealed shut by some magic");
         map[1][7] = new Tool("#", "Crack in the floor ", "Maybe it can be broken open");
-        map[6][1] = new Tool("\uD80C\uDEAF", "Table with holding items", "Vases and cups stand on a table");
-        map[6][4] = new Tool("\uD80C\uDEB3", "Table", "A frayed book rests upon a lone pine table");
+        map[6][1] = new Tool("⍰", "Table with holding items", "Vases and cups stand on a table");
+        map[6][4] = new Tool("▤", "Table", "A frayed book rests upon a lone pine table");
         map[1][18] = new Tool("⮹", "Treasure Chest", "Can unlock with a key");
-        // 🛡 🧺 🫖
+
 
         map[2][2] = new Gem( Colors.BLUE + "\uD83D\uDC8EKashmir Sapphire\uD83D\uDC8E" + Colors.RESET, "A gem found with dark blue to lighter hues",false);
         map[4][14] = new Gem( Colors.GREEN + "\uD83D\uDC8EEmerald\uD83D\uDC8E" + Colors.RESET, "A gem that shows off a rich green shine", false);

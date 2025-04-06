@@ -6,7 +6,7 @@ public class Journal {
     private ArrayList<Gem> gems;
 
     public Journal(String name) {
-        journal =  Colors.PURPLE + "[" + name + "'s journal]" + Colors.RESET + Colors.YELLOW + "\nDiscoveries:" + Colors.RESET;
+        journal =  Colors.PURPLE + "[" + name + "'s journal]" + Colors.RESET + Colors.YELLOW + "\nHolding:" + Colors.RESET;
         list = new ArrayList<>();
         gems = new ArrayList<>();
     }
@@ -20,13 +20,11 @@ public class Journal {
         for (int i = 0; i < gems.size(); i++) {
             System.out.println(gems.get(i));
         }
+        System.out.println();
     }
 
     public void addToTools(Item add1) {
-        if (!((Tool) add1).isCollectedAlready()) {
-            list.add((Tool) add1);
-            ((Tool)add1).setCollectedAlready(true);
-        }
+        list.add((Tool) add1);
     }
 
     public void removeTool(int add1) {
@@ -37,28 +35,69 @@ public class Journal {
         gems.add(element);
     }
 
-    public int progressing(String checkForThis) {
+    public int findDiscoveries(String checkForThis) {
         for (int l = 0; l < list.size(); l++) {
             if (list.get(l).getName().equals(checkForThis)) {
                 return l;
             }
         }
-        return 0;
+        return -1;
+    }
+
+    public void chest(Space move) {
+        if (findDiscoveries("Key") != -1 && ((Item)move).getName().equals("Treasure Chest")) {
+            Tool t = new Tool("˥","Crowbar", "You can pry things open now");
+            addToTools(t);
+            removeTool(findDiscoveries("Key"));
+            System.out.println("\nYou used your key");
+            System.out.println("You've obtained: " + t.getName());
+        }
+    }
+
+    public boolean floor(Space move) {
+        if (findDiscoveries("Crowbar") != -1 && move.getSymbol().equals("#")) {
+            Gem h = new Gem(Colors.RED + "\uD83D\uDC8ERuby\uD83D\uDC8E" + Colors.RESET, "A gem sporting a vivid red color", true);
+            System.out.print("...with your crowbar?\n\nYou used your crowbar\nYou've obtained: " + h.getName());
+            list.remove(findDiscoveries("Crowbar"));
+            addGems(h);
+            h.treasureChest();
+            return true;
+        }
+        return false;
+    }
+
+    public void chest2(Space move) {
+        int idx = -1;
+        for (int l = 0; l < gems.size(); l++) {
+            if (gems.get(l).getName().equals(Colors.RED + "\uD83D\uDC8ERuby\uD83D\uDC8E" + Colors.RESET)) {
+                idx = l;
+            }
+        }
+        if (idx != -1 && move.getSymbol().equals("⬓")) {
+            Gem a = new Gem(Colors.YELLOW + "\uD83D\uDC8EAmber\uD83D\uDC8E" + Colors.RESET, "An glowing orange gem ", false);
+            System.out.println("Turns out the ruby was just a key for a hidden part of this chest. ");
+            a.treasureChest();
+            list.remove(findDiscoveries("Ruby"));
+            addGems(a);
+        }
     }
 
     public boolean exitCheck(Space move) {
-        int result = 0;
-        for (int g = 0; g < gems.size(); g++) {
-            if (!gems.get(g).isTrick()) {
-                result++;
+        if (((Item)move).getName().equals("The Exit")) {
+            int result = 0;
+            for (int g = 0; g < gems.size(); g++) {
+                if (!gems.get(g).isTrick()) {
+                    result++;
+                }
+                if(gems.get(g).isTrick()) {
+                    System.out.println("\nThis " + gems.get(g).getName() + " isn't real!");
+                }
             }
-        }
-        if (result == 3 ) {
-            System.out.println("You opened the door ");
-            return true;
-        }
-        if (result < gems.size()) {
-            System.out.println("Some of the gems you're holding are not true");
+            if (result == 3 ) {
+                System.out.println("You opened the door ");
+                return true;
+            }
+            System.out.println("You can't open the door. You don't meet the requirements. ");
         }
         return false;
     }

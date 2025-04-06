@@ -8,11 +8,6 @@ public class Item extends Space{
         this.text = text;
     }
 
-    @Override
-    public String getSymbol() {
-        return super.getSymbol();
-    }
-
     public String getName() {
         return name;
     }

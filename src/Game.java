@@ -1,3 +1,4 @@
+import java.net.IDN;
 import java.util.Scanner;
 
 public class Game {
@@ -6,6 +7,7 @@ public class Game {
     private Player p;
     private Journal journal;
     private boolean done;
+
 
     public Game() {
         scan = new Scanner(System.in);
@@ -54,6 +56,9 @@ public class Game {
                         if (w instanceof Tool && !((Tool) w).isCollectedAlready()) {
                             shortcut(w);
                         }
+                        if (journal.exitCheck(w)) {
+                            done = true;
+                        }
                     } else {
                         System.out.println("You are moving out of bounds!");
                     }
@@ -74,6 +79,9 @@ public class Game {
                         }
                         if (a instanceof Tool) {
                             shortcut(a);
+                        }
+                        if (journal.exitCheck(a)) {
+                            done = true;
                         }
                     } else {
                         System.out.println("You are moving out of bounds!");
@@ -96,6 +104,9 @@ public class Game {
                         if (s instanceof Tool && !((Tool) s).isCollectedAlready()) {
                             shortcut(s);
                         }
+                        if (journal.exitCheck(s)) {
+                            done = true;
+                        }
                     } else {
                         System.out.println("You are moving out of bounds!");
                     }
@@ -117,6 +128,9 @@ public class Game {
                         if (d instanceof Tool) {
                             shortcut(d);
                         }
+                        if (journal.exitCheck(d)) {
+                            done = true;
+                        }
                     } else {
                         System.out.println("You are moving out of bounds!");
                     }
@@ -135,69 +149,38 @@ public class Game {
 
     private void shortcut(Space e) {
         bookRiddle(e);
-        chest(e);
-        if (floor(e)) {
-            chest2(e);
+        journal.chest(e);
+        if (journal.floor(e)) {
+            System.out.println("\nYou hear a click...What was that? ");
+            map[1][18] = new Tool("⬓", "Secret Treasure Chest Compartment", "The chest now has a secret compartment that can be opened with a circular object");
+            map[1][7] = new Tool("-", "Opened floor ", "You previously found a crowbar");
         }
-        if (((Item) e).getName().equals("Exit") && journal.exitCheck(e)) {
-            done = true;
-        }
+        journal.chest2(e);
     }
 
-    private int bookRiddle(Space move) {
-        int i = 0;
+    private void bookRiddle(Space move) {
         if (((Item)move).getName().equals("Table")) {
-            int you = 0;
-            while (you == 0) {
+            if (journal.findDiscoveries("Key") == -1) {
+            int guessRight = 0;
+                System.out.println("You've found a very special book. Maybe if you solve its riddle you'll get something that can help you.");
+            while (guessRight == 0) {
                 System.out.println("\nWhat has keys but can’t open locks?");
                 String a = scan.nextLine();
                 if (a.toLowerCase().equals("keyboard")) {
+                    Tool f = new Tool("\uD83D\uDDDD", "Key", "Can unlock a treasure chest");
                     System.out.println("You got it right!");
-                    you++;
+                    System.out.println("You gained a key. \uD83D\uDDDD\n");
+                    journal.addToTools(f);
+                    guessRight++;
                 } else {
                     System.out.println("That's wrong...\n");
                 }
             }
-            System.out.println("You gained a key. \uD83D\uDDDD\n");
-            journal.addToTools(new Tool("\uD83D\uDDDD", "Key", "Can unlock a treasure chest"));
-            i++;
-        }
-        return i;
-    }
 
-    public void chest(Space move) {
-        if (journal.progressing("Key") != 0 && move.getSymbol().equals("⮹")) {
-            Tool t = new Tool("˥","Crowbar", "You can pry things open now");
-            journal.addToTools(t);
-            journal.removeTool(journal.progressing("Key"));
-            System.out.println("You used your key");
-            System.out.println("\nYou've obtained: " + t.getName());
+            } else {
+                System.out.println("You've already obtained its key. Look around for its use. ");
+            }
         }
-    }
-
-    public boolean floor(Space move) {
-        if (journal.progressing("Crowbar") != 0 && move.getSymbol().equals("#")) {
-            Gem h = new Gem(Colors.RED + "\uD83D\uDC8ERuby\uD83D\uDC8E" + Colors.RESET, "A gem sporting a vivid red color", true);
-            System.out.println("You used your crowbar.\nYou found a round red gem!");
-            journal.removeTool(journal.progressing("Crowbar"));
-            journal.addGems(h);
-            h.treasureChest();
-            map[1][18] = new Tool("⮹", "Treasure Chest 2nd Level", "Secret compartment can be opened with a circular object");
-            return true;
-        }
-        return false;
-    }
-
-    public boolean chest2(Space move) {
-        if (journal.progressing("Ruby") != 0 && move.getSymbol().equals("⮹")) {
-            Gem h = new Gem(Colors.RED + "\uD83D\uDC8ERuby\uD83D\uDC8E" + Colors.RESET, "A gem sporting a vivid red color", true);
-            journal.removeTool(journal.progressing("Ruby"));
-            journal.addGems(h);
-            h.treasureChest();
-            map[1][18] = new Tool("⮹", "Treasure Chest 2nd Level", "Secret compartment can be opened with a circular object");
-            return true;
-        }
-        return false;
     }
 
 
@@ -227,7 +210,7 @@ public class Game {
         map[0][0] = new Space("╔");
         map[map.length-1][0] = new Space("╚");
         map[map.length-1][map[0].length-1] = new Space("╝");
-        map[6][17] = new Item("X", "The Exit", "It is sealed shut by some magic");
+        map[6][19] = new Item("X", "The Exit", "It is sealed shut by some magic. It requires 3 gemstones to open. ");
         map[1][7] = new Tool("#", "Crack in the floor ", "Maybe it can be broken open");
         map[6][1] = new Tool("⍰", "Table with holding items", "Vases and cups stand on a table");
         map[6][4] = new Tool("▤", "Table", "A frayed book rests upon a lone pine table");

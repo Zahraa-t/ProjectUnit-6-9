@@ -9,9 +9,4 @@ public class Player extends Space {
     public String getName() {
         return name;
     }
-
-    @Override
-    public String getSymbol() {
-        return super.getSymbol();
-    }
 }

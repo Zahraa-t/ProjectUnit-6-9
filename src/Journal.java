@@ -67,17 +67,17 @@ public class Journal {
     }
 
     public void chest2(Space move) {
-        int idx = -1;
+        int idx = 1;
         for (int l = 0; l < gems.size(); l++) {
             if (gems.get(l).getName().equals(Colors.RED + "\uD83D\uDC8ERuby\uD83D\uDC8E" + Colors.RESET)) {
                 idx = l;
             }
         }
-        if (idx != -1 && move.getSymbol().equals("⬓")) {
+        if (idx != 1 && move.getSymbol().equals("⬓")) {
             Gem a = new Gem(Colors.YELLOW + "\uD83D\uDC8EAmber\uD83D\uDC8E" + Colors.RESET, "An glowing orange gem ", false);
-            System.out.println("Turns out the ruby was just a key for a hidden part of this chest. ");
             a.treasureChest();
-            list.remove(findDiscoveries("Ruby"));
+            System.out.println("Turns out the ruby was just a key for a hidden part of this chest. ");
+            gems.remove(idx);
             addGems(a);
         }
     }
@@ -90,11 +90,11 @@ public class Journal {
                     result++;
                 }
                 if(gems.get(g).isTrick()) {
-                    System.out.println("\nThis " + gems.get(g).getName() + " isn't real!");
+                    System.out.println("\nOne of your gems (the " + gems.get(g).getName() + ") isn't real!");
                 }
             }
             if (result == 3 ) {
-                System.out.println("You opened the door ");
+                System.out.println("You met the requirement! You are holding the 3 gems. \nThe door opens \nYou can finally escape");
                 return true;
             }
             System.out.println("You can't open the door. You don't meet the requirements. ");

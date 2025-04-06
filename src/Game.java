@@ -32,6 +32,8 @@ public class Game {
             map[r][c] = p;
         }
 
+        System.out.println("You find yourself in a mysterious room. Find your way out.");
+
         while (!done) {
             if (start == 0) {
                 start++;
@@ -151,9 +153,9 @@ public class Game {
         bookRiddle(e);
         journal.chest(e);
         if (journal.floor(e)) {
-            System.out.println("\nYou hear a click...What was that? ");
-            map[1][18] = new Tool("⬓", "Secret Treasure Chest Compartment", "The chest now has a secret compartment that can be opened with a circular object");
-            map[1][7] = new Tool("-", "Opened floor ", "You previously found a crowbar");
+            System.out.println("\nYou hear a strange click...What was that? ");
+            map[2][14] = new Tool("⬓", "Secret Treasure Chest Compartment", "The chest now has a secret compartment that can be opened with a circular object");
+            map[2][4] = new Tool("-", "Opened floor ", "You previously found a crowbar");
         }
         journal.chest2(e);
     }
@@ -161,22 +163,21 @@ public class Game {
     private void bookRiddle(Space move) {
         if (((Item)move).getName().equals("Table")) {
             if (journal.findDiscoveries("Key") == -1) {
-            int guessRight = 0;
-                System.out.println("You've found a very special book. Maybe if you solve its riddle you'll get something that can help you.");
-            while (guessRight == 0) {
-                System.out.println("\nWhat has keys but can’t open locks?");
-                String a = scan.nextLine();
-                if (a.toLowerCase().equals("keyboard")) {
-                    Tool f = new Tool("\uD83D\uDDDD", "Key", "Can unlock a treasure chest");
-                    System.out.println("You got it right!");
-                    System.out.println("You gained a key. \uD83D\uDDDD\n");
-                    journal.addToTools(f);
-                    guessRight++;
-                } else {
-                    System.out.println("That's wrong...\n");
+                int guessRight = 0;
+                    System.out.println("You've found a very special book. Maybe if you solve its riddle you'll get something that can help you.");
+                while (guessRight == 0) {
+                    System.out.println("\nWhat has keys but can’t open locks?");
+                    String a = scan.nextLine();
+                    if (a.toLowerCase().equals("keyboard")) {
+                        Tool f = new Tool("\uD83D\uDDDD", "Key", "Can unlock a treasure chest");
+                        System.out.println("You got it right!");
+                        System.out.println("You gained a key. \uD83D\uDDDD\n");
+                        journal.addToTools(f);
+                        guessRight++;
+                    } else {
+                        System.out.println("That's wrong...\n");
+                    }
                 }
-            }
-
             } else {
                 System.out.println("You've already obtained its key. Look around for its use. ");
             }
@@ -188,15 +189,16 @@ public class Game {
     private void win() {
 
         System.out.println(
-                "-------------------------\n" +
-                        "---\\    /---|---|\\ |-----\n" +
-                        "----\\/\\/----|---| \\|-----\n"
+                "\n-------------------------\n" +
+                "---\\    /---|---|\\ |-----\n" +
+                "----\\/\\/----|---| \\|-----\n" +
+                "-------------------------\n"
         );
     }
 
 
     private void setMap() {
-        map = new Space[8][20];
+        map = new Space[7][15];
         for (int a = 1; a < map.length-1; a++) {
             map[a][0] = new Space("║");
             map[a][map[0].length-1] = new Space("║");
@@ -210,16 +212,17 @@ public class Game {
         map[0][0] = new Space("╔");
         map[map.length-1][0] = new Space("╚");
         map[map.length-1][map[0].length-1] = new Space("╝");
-        map[6][19] = new Item("X", "The Exit", "It is sealed shut by some magic. It requires 3 gemstones to open. ");
-        map[1][7] = new Tool("#", "Crack in the floor ", "Maybe it can be broken open");
-        map[6][1] = new Tool("⍰", "Table with holding items", "Vases and cups stand on a table");
-        map[6][4] = new Tool("▤", "Table", "A frayed book rests upon a lone pine table");
-        map[1][18] = new Tool("⮹", "Treasure Chest", "Can unlock with a key");
+        map[5][13] = new Item("X", "The Exit", "It is sealed shut by some magic. It requires 3 gemstones to open. ");
+        map[2][4] = new Tool("#", "Crack in the floor ", "Maybe it can be broken open");
+        map[5][1] = new Tool("▤", "Table with holding items", "Vases and cups stand on a table");
+        map[4][1] = new Tool("▬", "Table", "A frayed book rests upon a lone pine table");
+        map[2][13] = new Tool("⮹", "Treasure Chest", "Can unlock with a key");
+        map[1][9] = new Tool("▣", "Crate", "It stands on its own");
 
 
-        map[2][2] = new Gem( Colors.BLUE + "\uD83D\uDC8EKashmir Sapphire\uD83D\uDC8E" + Colors.RESET, "A gem found with dark blue to lighter hues",false);
-        map[4][14] = new Gem( Colors.GREEN + "\uD83D\uDC8EEmerald\uD83D\uDC8E" + Colors.RESET, "A gem that shows off a rich green shine", false);
-        map[7][6] = new Gem("\uD83D\uDC8EOpal\uD83D\uDC8E", "A gem that displays a variety of colors", false);
+        map[1][2] = new Gem( Colors.BLUE + "\uD83D\uDC8EKashmir Sapphire\uD83D\uDC8E" + Colors.RESET, "A gem found with dark blue to lighter hues",false);
+        map[3][11] = new Gem( Colors.GREEN + "\uD83D\uDC8EEmerald\uD83D\uDC8E" + Colors.RESET, "A gem that shows off a rich green shine", false);
+        map[5][6] = new Gem("\uD83D\uDC8EOpal\uD83D\uDC8E", "A gem that displays a variety of colors", false);
 
         for (int r  = 0; r < map.length; r++) {
             for (int c  = 0; c < map[0].length; c++){

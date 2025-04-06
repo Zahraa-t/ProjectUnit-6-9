@@ -154,7 +154,7 @@ public class Game {
         journal.chest(e);
         if (journal.floor(e)) {
             System.out.println("\nYou hear a strange click...What was that? ");
-            map[2][14] = new Tool("⬓", "Secret Treasure Chest Compartment", "The chest now has a secret compartment that can be opened with a circular object");
+            map[2][13] = new Tool("⬓", "Treasure Chest Secret Compartment", "The chest now has a secret compartment that can be opened with a circular object");
             map[2][4] = new Tool("-", "Opened floor ", "You previously found a crowbar");
         }
         journal.chest2(e);
@@ -212,7 +212,7 @@ public class Game {
         map[0][0] = new Space("╔");
         map[map.length-1][0] = new Space("╚");
         map[map.length-1][map[0].length-1] = new Space("╝");
-        map[5][13] = new Item("X", "The Exit", "It is sealed shut by some magic. It requires 3 gemstones to open. ");
+        map[5][13] = new Item("X", "The Exit", "It is sealed shut by some magic. It requires 4 gemstones to open. ");
         map[2][4] = new Tool("#", "Crack in the floor ", "Maybe it can be broken open");
         map[5][1] = new Tool("▤", "Table with holding items", "Vases and cups stand on a table");
         map[4][1] = new Tool("▬", "Table", "A frayed book rests upon a lone pine table");
@@ -220,7 +220,7 @@ public class Game {
         map[1][9] = new Tool("▣", "Crate", "It stands on its own");
 
 
-        map[1][2] = new Gem( Colors.BLUE + "\uD83D\uDC8EKashmir Sapphire\uD83D\uDC8E" + Colors.RESET, "A gem found with dark blue to lighter hues",false);
+        map[1][2] = new Gem( Colors.BLUE + "\uD83D\uDC8ESapphire\uD83D\uDC8E" + Colors.RESET, "A gem found with dark blue to lighter hues",false);
         map[3][11] = new Gem( Colors.GREEN + "\uD83D\uDC8EEmerald\uD83D\uDC8E" + Colors.RESET, "A gem that shows off a rich green shine", false);
         map[5][6] = new Gem("\uD83D\uDC8EOpal\uD83D\uDC8E", "A gem that displays a variety of colors", false);
 

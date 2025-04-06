@@ -60,7 +60,6 @@ public class Journal {
             System.out.print("...with your crowbar?\n\nYou used your crowbar\nYou've obtained: " + h.getName());
             list.remove(findDiscoveries("Crowbar"));
             addGems(h);
-            h.treasureChest();
             return true;
         }
         return false;
@@ -93,8 +92,8 @@ public class Journal {
                     System.out.println("\nOne of your gems (the " + gems.get(g).getName() + ") isn't real!");
                 }
             }
-            if (result == 3 ) {
-                System.out.println("You met the requirement! You are holding the 3 gems. \nThe door opens \nYou can finally escape");
+            if (result == 4 ) {
+                System.out.println("\nYou met the requirement! You are holding the 4 gems. \nThe door opens \nYou can finally escape");
                 return true;
             }
             System.out.println("You can't open the door. You don't meet the requirements. ");

@@ -1,21 +1,17 @@
 public class Tool extends Item {
     private boolean collectedAlready;
 
-    public Tool(String symbol, String name, String instructions) {
+    public Tool(String symbol, String name, String instructions, boolean collectedAlready) {
         super(symbol, name, instructions);
-        this.collectedAlready = false;
+        this.collectedAlready = collectedAlready;
     }
 
     public boolean isCollectedAlready() {
         return collectedAlready;
     }
 
-    public void setCollectedAlready(boolean collectedAlready) {
-        this.collectedAlready = collectedAlready;
-    }
-
     @Override
     public String toString() {
-        return "\n" + getSymbol() + "\n" + super.toString();
+        return super.toString() + " [" + getSymbol() + "]";
     }
 }

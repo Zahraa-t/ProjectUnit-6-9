@@ -49,8 +49,7 @@ public class Game {
                     r--;
                 } else {
                     if (w instanceof Item) {
-                        System.out.println("Found: " + ((Item) w).getName());
-                        System.out.println(((Item) w).getText());
+                        System.out.println(w);
                         if (w instanceof Gem) {
                             journal.addGems((Gem) w);
                             map[r-1][c] = new Space(" ");
@@ -154,8 +153,8 @@ public class Game {
         journal.chest(e);
         if (journal.floor(e)) {
             System.out.println("\nYou hear a strange click...What was that? ");
-            map[2][13] = new Tool("⬓", "Treasure Chest Secret Compartment", "The chest now has a secret compartment that can be opened with a circular object");
-            map[2][4] = new Tool("-", "Opened floor ", "You previously found a crowbar");
+            map[2][13] = new Tool("⬓", "Treasure Chest Secret Compartment", "The chest now has a secret compartment that can be opened with a circular object", false);
+            map[2][4] = new Tool("-", "Opened floor ", "You previously found a crowbar", false);
         }
         journal.chest2(e);
     }
@@ -169,7 +168,7 @@ public class Game {
                     System.out.println("\nWhat has keys but can’t open locks?");
                     String a = scan.nextLine();
                     if (a.toLowerCase().equals("keyboard")) {
-                        Tool f = new Tool("\uD83D\uDDDD", "Key", "Can unlock a treasure chest");
+                        Tool f = new Tool("\uD83D\uDDDD", "Key", "Can unlock a treasure chest", false);
                         System.out.println("You got it right!");
                         System.out.println("You gained a key. \uD83D\uDDDD\n");
                         journal.addToTools(f);
@@ -213,11 +212,11 @@ public class Game {
         map[map.length-1][0] = new Space("╚");
         map[map.length-1][map[0].length-1] = new Space("╝");
         map[5][14] = new Item("X", "The Exit", "It is sealed shut by some magic. It requires 4 gemstones to open. ");
-        map[2][4] = new Tool("#", "Crack in the floor ", "Maybe it can be broken open");
-        map[5][1] = new Tool("▤", "Table with holding items", "Vases and cups stand on a table");
-        map[4][1] = new Tool("▬", "Table", "A frayed book rests upon a lone pine table");
-        map[2][13] = new Tool("⮹", "Treasure Chest", "Can unlock with a key");
-        map[1][9] = new Tool("▣", "Crate", "It stands on its own");
+        map[2][4] = new Tool("#", "Crack in the floor ", "Maybe it can be broken open", false);
+        map[5][1] = new Tool("▤", "Table with holding items", "Vases and cups stand on a table", false);
+        map[4][1] = new Tool("▬", "Table", "A frayed book rests upon a lone pine table", false);
+        map[2][13] = new Tool("⮹", "Treasure Chest", "Can unlock with a key", false);
+        map[1][9] = new Tool("▣", "Crate", "It stands on its own", false);
 
 
         map[1][2] = new Gem( Colors.BLUE + "\uD83D\uDC8ESapphire\uD83D\uDC8E" + Colors.RESET, "A gem found with dark blue to lighter hues",false);

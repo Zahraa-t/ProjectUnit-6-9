@@ -14,7 +14,7 @@ public class Journal {
     public void getJournal() {
         System.out.println(journal);
         for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i).getName() + ": "  + list.get(i).getText());
+            System.out.println(list.get(i));
         }
         System.out.println("\n" + Colors.CYAN + "Gems collected: " + Colors.RESET);
         for (int i = 0; i < gems.size(); i++) {
@@ -46,7 +46,7 @@ public class Journal {
 
     public void chest(Space move) {
         if (findDiscoveries("Key") != -1 && ((Item)move).getName().equals("Treasure Chest")) {
-            Tool t = new Tool("˥","Crowbar", "You can pry things open now");
+            Tool t = new Tool("˥","Crowbar", "You can pry things open now", false);
             addToTools(t);
             removeTool(findDiscoveries("Key"));
             System.out.println("\nYou used your key");

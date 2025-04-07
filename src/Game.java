@@ -1,4 +1,3 @@
-import java.net.IDN;
 import java.util.Scanner;
 
 public class Game {

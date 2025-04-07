@@ -212,7 +212,7 @@ public class Game {
         map[0][0] = new Space("╔");
         map[map.length-1][0] = new Space("╚");
         map[map.length-1][map[0].length-1] = new Space("╝");
-        map[5][13] = new Item("X", "The Exit", "It is sealed shut by some magic. It requires 4 gemstones to open. ");
+        map[5][14] = new Item("X", "The Exit", "It is sealed shut by some magic. It requires 4 gemstones to open. ");
         map[2][4] = new Tool("#", "Crack in the floor ", "Maybe it can be broken open");
         map[5][1] = new Tool("▤", "Table with holding items", "Vases and cups stand on a table");
         map[4][1] = new Tool("▬", "Table", "A frayed book rests upon a lone pine table");
